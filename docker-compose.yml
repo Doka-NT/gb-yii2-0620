@@ -1,0 +1,35 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: foo
+            MYSQL_DATABASE: foo
+            MYSQL_USER: foo
+            MYSQL_PASSWORD: foo
+        ports:
+            - 3306:3306
+    phpmyadmin:
+        depends_on:
+            - db
+        links:
+            - db
+        image: phpmyadmin/phpmyadmin
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: foo
+        ports:
+            - 8081:80
+        volumes:
+            - /sessions
+
+    redis:
+        image: 'bitnami/redis:latest'
+        environment:
+          # ALLOW_EMPTY_PASSWORD is recommended only for development.
+          - ALLOW_EMPTY_PASSWORD=yes
+#          - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+        ports:
+          - '6379:6379'
