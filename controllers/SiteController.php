@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Note;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -64,6 +65,16 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+	/**
+	 * @return string
+	 */
+	public function actionIndexFoo(): string
+	{
+		\Yii::$app->response->format = Response::FORMAT_JSON;
+
+		return \json_encode(['foo' => 'bar']);
+    }
+
     /**
      * Login action.
      *
@@ -123,6 +134,14 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+		$note = new Note();
+		$note->setAttributes([
+			'id' => 50,
+			'name' => 'Наша супер заметка',
+		]);
+
+        return $this->render('about', [
+        	'model' => $note,
+		]);
     }
 }
