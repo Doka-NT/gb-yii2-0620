@@ -50,4 +50,12 @@ class Event extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+	/**
+	 * @return void
+	 */
+	public function doCoolThing(): void
+	{
+		\var_dump('HELLO');
+    }
 }

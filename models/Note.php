@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "note".
@@ -11,6 +12,8 @@ use Yii;
  * @property string $name Название заметки
  * @property string $created_at Создано
  * @property string $updated_at Обновлено
+ * @property int $author_id
+ * @property User $author
  */
 class Note extends \yii\db\ActiveRecord
 {
@@ -48,5 +51,13 @@ class Note extends \yii\db\ActiveRecord
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         ];
+    }
+
+	/**
+	 * @return ActiveQuery
+	 */
+	public function getAuthor(): ActiveQuery
+	{
+		return $this->hasOne(User::class, ['id' => 'author_id']);
     }
 }
