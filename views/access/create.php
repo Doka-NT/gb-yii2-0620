@@ -1,18 +1,18 @@
 <?php
 
-use app\objects\ViewModels\NoteCreateView;
+use app\objects\ViewModels\AccessCreateView;
 use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Note */
-/* @var $viewModel NoteCreateView */
+/* @var $model app\models\Access */
+/* @var $viewModel AccessCreateView */
 
-$this->title = 'Create Note';
-$this->params['breadcrumbs'][] = ['label' => 'Notes', 'url' => ['index']];
+$this->title = 'Create Access';
+$this->params['breadcrumbs'][] = ['label' => 'Accesses', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="note-create">
+<div class="access-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

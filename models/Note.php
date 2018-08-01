@@ -37,6 +37,7 @@ class Note extends \yii\db\ActiveRecord
 			['ids', 'integer'],
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
+			['author_id', 'integer'],
         ];
     }
 

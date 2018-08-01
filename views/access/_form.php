@@ -1,23 +1,23 @@
 <?php
 
-use app\objects\ViewModels\NoteCreateView;
+use app\objects\ViewModels\AccessCreateView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Note */
+/* @var $model app\models\Access */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $viewModel NoteCreateView */
+/* @var $viewModel AccessCreateView */
 
 ?>
 
-
-<div class="note-form">
+<div class="access-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-	<?= $form->field($model, 'author_id')->dropDownList($viewModel->getUserOptions());?>
+    <?= $form->field($model, 'note_id')->dropDownList($viewModel->getNoteOptions()) ?>
+
+    <?= $form->field($model, 'user_id')->dropDownList($viewModel->getUserOptions()) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
