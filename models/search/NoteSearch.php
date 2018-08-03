@@ -66,6 +66,7 @@ class NoteSearch extends Note
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andWhere(['author_id' => \Yii::$app->user->getId()]);
 
         return $dataProvider;
     }

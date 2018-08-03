@@ -29,14 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             [
             		'value' => 'created_at',
-					'format' => 'datetime'
+					'format' => 'datetime', // date, time
 			],
             [
             		'value' => 'updated_at',
-				'format' => [
-					'date',
-					'php:d.m.Y H:i:s',
-				]
+					'format' => [
+						'date',
+						'php:d.m.Y H:i:s',
+					]
 			],
             'author.username',
 

@@ -154,4 +154,39 @@ class NoteController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+	/**
+	 * @return string
+	 */
+	public function actionIndexCalendar(): string
+	{
+		$dates = [
+			'2018-08-01',
+			'2018-08-02',
+			// ...
+			'2018-08-30',
+		];
+
+		$notes = Note::find()
+			->byDates($dates)
+			->all();
+
+		$days = [];
+		foreach ($notes as $note) {
+			if (isset($days[$note->created_at])) {
+				$days[$note->created_at] = [];
+			}
+
+			$days[$note->created_at][] = $note;
+		}
+
+		return $this->render('calendar', [
+			'days' => $days,
+		]);
+
+		// in calendar.php
+//		foreach ($days as $day => $notes) {
+//			$count = count($notes);
+//		}
+    }
 }
