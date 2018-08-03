@@ -1,9 +1,11 @@
 <?php
 
+use app\objects\ViewModels\NoteCreateView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Note */
+/* @var $viewModel NoteCreateView */
 
 $this->title = 'Update Note: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Notes', 'url' => ['index']];
@@ -16,6 +18,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+		'viewModel' => $viewModel,
     ]) ?>
 
 </div>

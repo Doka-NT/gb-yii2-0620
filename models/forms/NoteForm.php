@@ -2,37 +2,49 @@
 
 namespace app\models\forms;
 
+use app\models\Access;
 use app\models\Note;
 use app\models\User;
 
 class NoteForm extends Note
 {
-	public $username;
-	public $password;
+	public $users = [];
 
 	public function rules(): array
 	{
 		$rules = parent::rules();
-		$rules[] = [['username', 'password'], 'required'];
+		$rules[] = ['users', 'checkUser'];
 
 		return $rules;
 	}
 
-	public function createUserAndSave(): bool
+	/**
+	 * @return void
+	 */
+	public function checkUser(): void
 	{
-		$user = new User();
-		$user->username = $this->username;
-		$user->password = $this->password;
-
-		if ($user->save()) {
-			$this->save();
-			$this->link('author', $user);
-
-			return true;
+		foreach ($this->users as $userId) {
+			$count = (int)User::find()->andWhere(['id' => $userId])->count('id');
+			if ($count === 0) {
+				$this->addError('users', \sprintf('Пользователя с ID=%d не существует', $userId));
+			}
 		}
-
-		return false;
 	}
 
+	public function afterFind()
+	{
+		parent::afterFind();
 
+		$this->users = Access::find()->select(['user_id'])->andWhere(['note_id' => $this->id])->column();
+	}
+
+	public function afterSave($insert, $changedAttributes)
+	{
+		parent::afterSave($insert, $changedAttributes);
+		Access::deleteAll(['note_id' => $this->id]);
+
+		foreach ($this->users as $userId) {
+			Access::saveAccess($this, $userId);
+		}
+	}
 }

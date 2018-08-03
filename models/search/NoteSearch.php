@@ -47,6 +47,9 @@ class NoteSearch extends Note
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'pagination' => [
+				'pageSize' => 2,
+			]
         ]);
 
         $this->load($params);
@@ -66,7 +69,16 @@ class NoteSearch extends Note
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
-        $query->andWhere(['author_id' => \Yii::$app->user->getId()]);
+
+        $query->leftJoin(['access' => 'access'], 'note.id = access.note_id');
+        $query->andWhere(
+        	[
+        		'or',
+				['author_id' => \Yii::$app->user->getId()],
+				['access.user_id' => \Yii::$app->user->getId()],
+			]
+
+		);
 
         return $dataProvider;
     }

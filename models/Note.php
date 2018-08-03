@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\models\queries\NoteQuery;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -32,6 +33,26 @@ class Note extends \yii\db\ActiveRecord
 	{
 		return new NoteQuery(get_called_class());
 	}
+
+	public function beforeSave($insert): bool
+	{
+		if (!$this->author_id) {
+			$this->author_id = \Yii::$app->getUser()->getId();
+		}
+
+		return parent::beforeSave($insert);
+	}
+
+//	public function behaviors()
+//	{
+//		return [
+//			'timestamp' => [
+//				'class' => TimestampBehavior::class,
+//				'createdAtAttribute' => 'created_at',
+//				'updatedAtAttribute' => 'updated_at',
+//			],
+//		];
+//	}
 
 	/**
      * {@inheritdoc}

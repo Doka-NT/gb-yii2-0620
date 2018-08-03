@@ -19,28 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Note', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            [
-            		'value' => 'created_at',
-					'format' => 'datetime', // date, time
-			],
-            [
-            		'value' => 'updated_at',
-					'format' => [
-						'date',
-						'php:d.m.Y H:i:s',
-					]
-			],
-            'author.username',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+	<?=\yii\widgets\ListView::widget([
+			'dataProvider' => $dataProvider,
+		'itemView' => '_item',
+	]);?>
 </div>
