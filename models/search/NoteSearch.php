@@ -4,6 +4,8 @@ namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
+use yii\caching\DbDependency;
+use yii\caching\ExpressionDependency;
 use yii\data\ActiveDataProvider;
 use app\models\Note;
 
@@ -43,6 +45,11 @@ class NoteSearch extends Note
     {
         $query = Note::find();
 
+//        $dependency = new DbDependency([
+//        	'sql' => 'SELECT COUNT(id) FROM note',
+//		]);
+
+//        $query->cache(3600, $dependency);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

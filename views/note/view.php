@@ -29,6 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 	<?php endif; ?>
 
+	<?php if ($this->beginCache('note-view-time', ['duration' => 10])):?>
+		<div>
+			Текущее время:
+			<?=date('d.m.Y H:i:s');?>
+		</div>
+		<?=$this->endCache();?>
+	<?php endif;?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

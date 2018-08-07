@@ -1,7 +1,11 @@
 <?php
 
+use yii\caching\DummyCache;
+use yii\redis\Cache;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$redis = require __DIR__ . '/redis.php';
 
 $config = [
     'id' => 'basic',
@@ -20,7 +24,7 @@ $config = [
             'cookieValidationKey' => 'bkq46chOR3TIGxVVfUgOJG46FZqoADy2',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => Cache::class,
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -45,6 +49,7 @@ $config = [
                 ],
             ],
         ],
+		'redis' => $redis,
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
