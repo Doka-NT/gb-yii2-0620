@@ -45,17 +45,29 @@ class NoteSearch extends Note
     {
         $query = Note::find();
 
-//        $dependency = new DbDependency([
-//        	'sql' => 'SELECT COUNT(id) FROM note',
-//		]);
+		$command = Note::find()
+			->select('COUNT(*)')
+			->joinWith('access')
+			->andWhere(
+				[
+					'or',
+					['author_id' => \Yii::$app->user->getId()],
+					['access.user_id' => \Yii::$app->user->getId()],
+				]
 
-//        $query->cache(3600, $dependency);
-        // add conditions that should always apply here
+			)
+			->createCommand();
+
+        $dependency = new DbDependency([
+        	'sql' => $command->getRawSql(),
+		]);
+
+        $query->cache(30 * 24 * 60 * 60, $dependency);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
 			'pagination' => [
-				'pageSize' => 2,
+				'pageSize' => 10,
 			]
         ]);
 

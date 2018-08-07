@@ -18,11 +18,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-	<?= $form->field($model, 'users')
-		->checkboxList($viewModel->getUserOptions(), ['separator' => '<br/>'])
-		->label('Пользователи')
-		->hint('Пользователи, которые будут иметь доступ к заметке')
-	; ?>
+	<?php if($this->beginCache('note-form-users-filed', ['duration' => \Yii::$app->params['cache-duration']])) :?>
+		<?= $form->field($model, 'users')
+			->checkboxList($viewModel->getUserOptions(), ['separator' => '<br/>'])
+			->label('Пользователи')
+			->hint('Пользователи, которые будут иметь доступ к заметке')
+		; ?>
+	<?=$this->endCache();?>
+	<?php endif;?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -4,11 +4,13 @@ use app\models\Note;
 
 /* @var $model Note */
 
+$name = \yii\helpers\Html::encode($model->name);
+
 ?>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<b><?=\yii\helpers\Html::encode($model->name);?></b>
+		<b><?=\yii\helpers\Html::a($name, ['note/view', 'id' => $model->id]);?></b>
 	</div>
 	<div class="panel-body">
 		<p>Автор: <?=$model->author->username;?></p>

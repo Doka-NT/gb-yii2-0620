@@ -88,4 +88,12 @@ class Note extends \yii\db\ActiveRecord
 	{
 		return $this->hasOne(User::class, ['id' => 'author_id']);
     }
+
+	/**
+	 * @return ActiveQuery
+	 */
+	public function getAccess(): ActiveQuery
+	{
+		return $this->hasOne(Access::class, ['note_id' => 'id']);
+    }
 }

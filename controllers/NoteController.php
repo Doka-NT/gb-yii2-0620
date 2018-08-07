@@ -12,6 +12,7 @@ use DateTime;
 use Yii;
 use yii\db\Connection;
 use yii\filters\AccessControl;
+use yii\filters\HttpCache;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -48,6 +49,19 @@ class NoteController extends Controller
 						'roles' => ['?'], // гости
 					],
 				],
+			],
+			'cache' => [
+				'class' => HttpCache::class,
+				'only' => ['view'],
+				'lastModified' => function () {
+					$id = (int) \Yii::$app->getRequest()->getQueryParam('id');
+					$model = $this->findModel($id);
+
+					return \strtotime($model->created_at);
+				},
+//				'etagSeed' => function ($action, $params) {
+//
+//				}
 			]
         ];
     }
@@ -58,27 +72,7 @@ class NoteController extends Controller
      */
     public function actionIndex()
     {
-    	$db = \Yii::$app->getDb();
-
-//    	$result = $db->createCommand('SELECT * FROM access')->cache(30)->queryAll();
-
-//    	$db->cache(function (Connection $db) {
-//    		$result1 = $db->createCommand('SELECT * FROM access WHERE 1=1')->queryAll();
-//    		$result2 = $db->createCommand('SELECT * FROM note WHERE 1=1')->queryAll();
-//		}, 60);
-
-//		$cache = \Yii::$app->getCache();
-//
-//		$date = $cache->get('date1');
-//
-//		if (!$date) {
-//			$date = date('d.m.Y H:i:s');
-//			$cache->set('date1', $date);
-//		}
-//
-//		d($date);exit;
-
-        $searchModel = new NoteSearch();
+    	$searchModel = new NoteSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -87,12 +81,15 @@ class NoteController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Note model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+	/**
+	 * Displays a single Note model.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found*@throws ForbiddenHttpException
+	 * @throws ForbiddenHttpException
+	 */
     public function actionView($id)
     {
 		$note = $this->findModel($id);
