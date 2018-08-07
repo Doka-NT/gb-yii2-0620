@@ -8,6 +8,7 @@ use app\models\Note;
 use app\models\search\NoteSearch;
 use app\objects\ViewModels\NoteCreateView;
 use app\objects\ViewModels\NoteView;
+use DateTime;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -121,8 +122,9 @@ class NoteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$date = new DateTime($model->start_at);
 
-		if (!$this->checkWriteAccess($model)) {
+		if (!$this->checkWriteAccess($model) && $date->getTimestamp() < time()) {
 			throw new ForbiddenHttpException();
 		}
 

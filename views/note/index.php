@@ -24,3 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'itemView' => '_item',
 	]);?>
 </div>
+
+<?=\app\widgets\MyCoolWidget::widget([
+	'param1' => 'hellow, world',
+]);?>
