@@ -59,6 +59,11 @@ $config = [
             ],
         ],
     ],
+	'modules' => [
+		'admin' => [
+			'class' => app\modules\admin\Module::class,
+		],
+	],
     'params' => $params,
 ];
 

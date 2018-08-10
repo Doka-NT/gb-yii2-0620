@@ -7,6 +7,7 @@
 
 namespace app\assets;
 
+use artem\foobar\FoobarAssets;
 use yii\web\AssetBundle;
 
 /**
@@ -27,5 +28,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+		FoobarAssets::class,
     ];
 }

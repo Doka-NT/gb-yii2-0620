@@ -10,6 +10,9 @@ use yii\grid\GridView;
 $this->title = 'Notes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
 <div class="note-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

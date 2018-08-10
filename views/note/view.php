@@ -48,4 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+	<?=\artem\foobar\AutoloadExample::widget([
+			'db' => \Yii::$app->db,
+	]);?>
 </div>
+

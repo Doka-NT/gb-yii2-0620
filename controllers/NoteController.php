@@ -57,7 +57,8 @@ class NoteController extends Controller
 					$id = (int) \Yii::$app->getRequest()->getQueryParam('id');
 					$model = $this->findModel($id);
 
-					return \strtotime($model->created_at);
+					return 0;
+					//return \strtotime($model->created_at);
 				},
 //				'etagSeed' => function ($action, $params) {
 //

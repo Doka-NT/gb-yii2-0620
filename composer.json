@@ -12,13 +12,15 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "yiisoft/yii2-redis": "~2.0.0"
+        "yiisoft/yii2-redis": "~2.0.0",
+        "dmstr/yii2-adminlte-asset": "^2.1",
+        "skobka/command-pattern": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -66,5 +68,11 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "",
+            "artem\\foobar\\": "runtime/tmp-extensions/yii2-foobar"
+        }
+    }
 }
