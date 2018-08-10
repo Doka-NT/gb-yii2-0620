@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 	<?php endif; ?>
 
-	<?php if ($this->beginCache('note-view-time', ['duration' => 10])):?>
+	<?php if ($this->beginCache('note-view-' . $model->id, ['duration' => 10])):?>
 		<div>
 			Текущее время:
 			<?=date('d.m.Y H:i:s');?>
