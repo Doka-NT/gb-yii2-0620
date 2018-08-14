@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiisoft/yii2-redis": "~2.0.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
-        "skobka/command-pattern": "dev-master"
+        "skobka/command-pattern": "dev-master",
+        "kartik-v/yii2-widgets": "*",
+        "vlucas/phpdotenv": "^2.5@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -1,5 +1,6 @@
 <?php
 
+use app\components\FooComponent;
 use yii\caching\DummyCache;
 use yii\redis\Cache;
 
@@ -58,6 +59,11 @@ $config = [
             	'<controller>/<action>/<id:\d+>' => '<controller>/<action>',
             ],
         ],
+		'foo' => [ // Yii::$app->foo
+			'class' => FooComponent::class,
+			'title' => 'foo',
+			'body' => 'bar',
+		],
     ],
 	'modules' => [
 		'admin' => [

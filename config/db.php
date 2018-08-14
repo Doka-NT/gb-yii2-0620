@@ -3,8 +3,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=127.0.0.1;dbname=foo',
-    'username' => 'foo',
-    'password' => 'foo',
+    'username' => $_ENV['MYSQL_USER'],
+    'password' => $_ENV['MYSQL_PASS'],
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

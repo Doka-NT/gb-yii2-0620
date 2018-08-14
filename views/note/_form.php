@@ -1,6 +1,7 @@
 <?php
 
 use app\objects\ViewModels\NoteCreateView;
+use kartik\widgets\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -18,14 +19,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-	<?php if($this->beginCache('note-form-users-filed', ['duration' => \Yii::$app->params['cache-duration']])) :?>
+	<?php /* if($this->beginCache('note-form-users-filed', ['duration' => \Yii::$app->params['cache-duration']])) :?>
 		<?= $form->field($model, 'users')
 			->checkboxList($viewModel->getUserOptions(), ['separator' => '<br/>'])
 			->label('Пользователи')
 			->hint('Пользователи, которые будут иметь доступ к заметке')
 		; ?>
-	<?=$this->endCache();?>
-	<?php endif;?>
+	<?=$this->endCache(); */?>
+
+	<?= $form->field($model, 'users')->widget(Select2::class, [
+		'data' => $viewModel->getUserOptions(),
+		'options' => [
+				'multiple' => true,
+		],
+]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
