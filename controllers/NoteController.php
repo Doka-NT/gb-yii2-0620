@@ -6,6 +6,7 @@ use app\models\Access;
 use app\models\forms\NoteForm;
 use app\models\Note;
 use app\models\search\NoteSearch;
+use app\objects\requests\RequestBlocker;
 use app\objects\ViewModels\NoteCreateView;
 use app\objects\ViewModels\NoteView;
 use DateTime;
